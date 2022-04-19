@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Assignmentfive.Models.OrderSummary>
+
+@{
+    ViewBag.Title = "AllOrders";
+}
+
+<h2>AllOrders</h2>
+<body style="background-color:burlywood">
+</body>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.O_Name)
+        </th>
+      @*  <th>
+            @Html.DisplayNameFor(model => model.BookName)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Qty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.B_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.O_Name)
+        </td>
+      @*  <td>
+            @Html.DisplayFor(modelItem => item.BookName)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Qty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book.B_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OrderSummaryID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OrderSummaryID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OrderSummaryID })
+        </td>
+    </tr>
+}
+
+</table>

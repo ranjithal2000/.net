@@ -1,0 +1,67 @@
+﻿@model Assignmentfive.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<body style="background-color:burlywood">
+</body>
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.B_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.B_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.B_Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.B_Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.C_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.C_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BookID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

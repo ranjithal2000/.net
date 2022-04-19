@@ -1,0 +1,124 @@
+﻿@model Assignmentfive.Models.Book
+@{
+    ViewBag.Title = "Buy";
+
+}
+
+<h2>Buy</h2>
+<body style="background-color:burlywood">
+</body>
+@section scripts {
+
+<script type="text/javascript">
+function getQty() {
+
+qty = document.getElementById('quantity1').value;
+@*var numbers = /^[0-9]+$/;
+if (qty.match(numbers)) {*@
+if (qty <= 0) {
+alert('Enter valid quantity');
+document.getElementById('quantity1').value = '';
+}
+else if (qty <@Model.Quantity) {
+tp = qty * @(Model.Price)
+// alert('total price ' + tp + "!");
+
+document.getElementById('#totalprice').value = tp
+}
+else {
+alert('not enough stock!!!Available Quantity is : ' +@Model.Quantity);
+document.getElementById('quantity1').value = '';
+}
+@* }
+//alert('You clicked ' + qty + "!");
+else {
+alert('Enter valid quantity');
+document.getElementById('quantity1').value = '';
+}*@
+}
+    </script>
+}
+<div>
+    <h4>Book</h4>
+    <hr />
+    @using (Html.BeginForm("OrderSummary", "Books", FormMethod.Post))
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.BookID)
+            </dt>
+            <dd>
+                <input type="text" name="BookID" id="BookID" value=@Model.BookID readonly />
+                @*@Html.DisplayFor(model => model.B_Name)*@
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.B_Name)
+            </dt>
+            <dd>
+                <input type="text" name="B_Name" id="B_Name" value=@Model.B_Name readonly />
+                @*@Html.DisplayFor(model => model.B_Name)*@
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Author)
+            </dt>
+            <dd>
+                <input type="text" name="Author" id="Author" value=@Model.Author readonly />
+                @*@Html.DisplayFor(model => model.Author)*@
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd>
+                <input type="text" name="Price" id="Price" value=@Model.Price readonly />
+                @*@Html.DisplayFor(model => model.Price)*@
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </dt>
+            <dd>
+                <input type="text" name="Quantity" id="Quantity" value=@Model.Quantity readonly />
+                @*@Html.DisplayFor(model => model.Quantity)*@
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.B_Image)
+            </dt>
+            <dd>
+                @*<img src="@Html.DisplayFor(model => model.B_Image)" width="50px" height="50px" />
+                    @(Model.B_Image)*@
+                <img src="@Url.Content("../"+@Model.B_Image)" alt="book" width="50px" height="50px" />
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Category.C_Name)
+            </dt>
+            <dd>
+                <input type="text" name="C_Name" id="C_Name" value=@Model.Category.C_Name readonly />
+                @*@Html.DisplayFor(model => model.Category.C_Name)*@
+            </dd>
+            <dt>
+                @Html.DisplayName("User Name")
+            </dt>
+            <dd>
+                <input type="text" name="UserName" id="UserName" value="@User.Identity.Name" readonly />
+            </dd>
+            <dt>
+                @Html.DisplayName("Quantity")
+            </dt>
+            <dd>
+                <input type="text" name="quantity1" id="quantity1" onblur="getQty()"  required />
+                @Html.ActionLink("Calculate", "Books", new { id = Model.BookID })
+            </dd>
+            <dt>
+                @Html.DisplayName("Total Price")
+            </dt>
+            <dd>
+                <input type="text" name="totalprice" id="#totalprice" readonly />
+                @*<h6 id="#totalprice"></h6>*@
+
+            </dd>
+            <input type="submit" />
+        </dl>
+    }
+    @*<div style="background-color:gold;border-radius:15px;height:-5px!important;width:50px;text-align:center">
+        @Html.ActionLink("Purchase", "OrderSummary", new { id = Model.BookID, qty = @Html.TextBox("quantity"), tp = @Html.TextBox("quantity") })
+        </div>*@
+</div>

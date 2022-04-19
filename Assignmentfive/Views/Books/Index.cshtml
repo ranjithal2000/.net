@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Assignmentfive.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<body style="background-color:burlywood">
+</body>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.B_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.B_Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.C_Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.B_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            @* <td>
+                    @Html.DisplayFor(modelItem => item.B_Image)
+                </td>*@
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.B_Image)" width="70px" height="70px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.C_Name)
+            </td>
+            <td>
+                @if (item.Quantity <= 0)
+                {
+                    <div style="background-color:gold;border-radius:15px;height:-5px!important;width:100px;text-align:center">
+                        <p>Out Of Stock</p>
+                    </div>
+                }
+                else
+                {
+                    <div style="background-color:gold;border-radius:15px;height:-5px!important;width:50px;text-align:center">
+
+                        @Html.ActionLink("Buy", "Buy", new { id = item.BookID })
+                    </div>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.BookID }) <text>|</text>
+                    @Html.ActionLink("Details", "Details", new { id = item.BookID }) <text>|</text>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
+                }
+            </td>
+        </tr>
+    }
+
+    <div>
+        @using (Html.BeginForm("shows", "Books", FormMethod.Post))
+        {
+            @Html.TextBox("search", null, new { @class = "form-control", placeholder = "Book", @style = "width:400px;" })
+            <button class="btn btn-success" type="submit">
+                &nbsp;&nbsp;&nbsp;&nbsp;Find&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-search" style="font-size:20px;color:white"></i>
+            </button>
+        }
+    </div>
+</table>
+
